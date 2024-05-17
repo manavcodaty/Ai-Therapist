@@ -17,7 +17,7 @@ with open('intents.json') as file:
 
 def chat():
     #load trained model
-    model = keras.models.load_model('chat-model')
+    model = keras.models.load_model('chat-model.keras')
 
     #load tokenizer object
     with open('tokenizer.pickle', 'rb') as handle:
@@ -34,7 +34,7 @@ def chat():
         print(Fore.LIGHTBLUE_EX + 'User: ' + Style.RESET_ALL, end = "")
         inp = input()
         if inp.lower() == 'quit':
-            print(Fore.GREEN + 'Pandora:' + Style.RESET_ALL, "Take care. See you soon.")
+            print(Fore.GREEN + 'Maya:' + Style.RESET_ALL, "Take care. See you soon.")
             break
     
         result = model.predict(keras.preprocessing.sequence.pad_sequences(tokenizer.texts_to_sequences([inp]), truncating = 'post', maxlen = max_len))
@@ -42,10 +42,10 @@ def chat():
 
         for i in data['intents']:
             if i['tag'] == tag:
-                print(Fore.GREEN + 'Pandora:' + Style.RESET_ALL, np.random.choice(i['responses']))
+                print(Fore.GREEN + 'Maya:' + Style.RESET_ALL, np.random.choice(i['responses']))
 
     
-print(Fore.YELLOW + 'Start talking with Pandora, your Personal Therapeutic AI Assistant. (Type quit to stop talking)' + Style.RESET_ALL)
+print(Fore.YELLOW + 'Start talking with Maya, your Personal Therapeutic AI Assistant. (Type quit to stop talking)' + Style.RESET_ALL)
 chat()
 
 

@@ -5,12 +5,12 @@ import warnings
 warnings.filterwarnings("ignore")
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.python.keras.models import Sequential
-from tensorflow.python.keras.layers import Dense, Embedding, GlobalAveragePooling1D, Bidirectional
-from tensorflow.python.keras.preprocessing.text import Tokenizer
-from tensorflow.python.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Embedding, GlobalAveragePooling1D, Bidirectional
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 from sklearn.preprocessing import LabelEncoder
-from tensorflow.python.keras import layers
+from tensorflow.keras import layers
 
  
 #load the json file
