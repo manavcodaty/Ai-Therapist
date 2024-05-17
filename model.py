@@ -50,12 +50,31 @@ sequences = tokenizer.texts_to_sequences(training_sentences)
 padded_sequences = pad_sequences(sequences, truncating = 'post', maxlen = max_len)
 
 #model
+#model = Sequential()
+#model.add(Embedding(vocab_size, embedding_dim, input_length=max_len))
+#model.add(GlobalAveragePooling1D())
+#model.add(Dense(16, activation='relu'))
+#model.add(Dense(16, activation='relu'))
+#model.add(Dense(num_classes, activation='softmax'))
+
+#model2
 model = Sequential()
 model.add(Embedding(vocab_size, embedding_dim, input_length=max_len))
-model.add(GlobalAveragePooling1D())
+#LSTM layer with 128 internal units
+model.add(layers.LSTM(128))
 model.add(Dense(16, activation='relu'))
 model.add(Dense(16, activation='relu'))
 model.add(Dense(num_classes, activation='softmax'))
+
+#model3
+    # model = Sequential()
+    # model.add(Embedding(vocab_size, embedding_dim, input_length=max_len))
+    # model.add(Bidirectional(tf.keras.layers.LSTM(64))),
+    # model.add(Dense(16, activation='relu'))
+    # model.add(Dense(16, activation='relu'))
+    # model.add(Dense(num_classes, activation='softmax'))
+
+ #   'cosine_similarity', 'kullback_leibler_divergence']) #   , 'poisson'
 
 model.compile(loss='sparse_categorical_crossentropy', 
               optimizer='adam', metrics=['accuracy']) 
@@ -63,7 +82,7 @@ model.compile(loss='sparse_categorical_crossentropy',
 
 model.summary()
 
-epochs = 500
+epochs = 1000
 history = model.fit(padded_sequences, np.array(training_labels), epochs = epochs)
 
 #save the trained model
@@ -77,21 +96,5 @@ with open('tokenizer.pickle', 'wb') as handle:
 with open('label_encoder.pickle', 'wb') as ecn_file:
     pickle.dump(lbl_encoder, ecn_file, protocol = pickle.HIGHEST_PROTOCOL)
 
-#model2
-# model = Sequential()
-# model.add(Embedding(vocab_size, embedding_dim, input_length=max_len))
-# #LSTM layer with 128 internal units
-# model.add(layers.LSTM(128))
-# model.add(Dense(16, activation='relu'))
-# model.add(Dense(16, activation='relu'))
-# model.add(Dense(num_classes, activation='softmax'))
 
-#model3
-    # model = Sequential()
-    # model.add(Embedding(vocab_size, embedding_dim, input_length=max_len))
-    # model.add(Bidirectional(tf.keras.layers.LSTM(64))),
-    # model.add(Dense(16, activation='relu'))
-    # model.add(Dense(16, activation='relu'))
-    # model.add(Dense(num_classes, activation='softmax'))
 
- #   'cosine_similarity', 'kullback_leibler_divergence']) #   , 'poisson'
