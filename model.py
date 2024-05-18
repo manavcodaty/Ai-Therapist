@@ -69,7 +69,7 @@ padded_sequences = pad_sequences(sequences, truncating = 'post', maxlen = max_le
 #model3
 model = Sequential()
 model.add(Embedding(vocab_size, embedding_dim, input_length=max_len))
-model.add(Bidirectional(tf.keras.layers.LSTM(128))),
+model.add(Bidirectional(tf.keras.layers.LSTM(256))),
 model.add(Dense(16, activation='relu'))
 model.add(Dense(16, activation='relu'))
 model.add(Dense(num_classes, activation='softmax'))
@@ -82,7 +82,7 @@ model.compile(loss='sparse_categorical_crossentropy',
 
 model.summary()
 
-epochs = 1000
+epochs = 3000
 history = model.fit(padded_sequences, np.array(training_labels), epochs = epochs)
 
 #save the trained model
